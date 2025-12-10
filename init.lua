@@ -1013,6 +1013,7 @@ require('lazy').setup({
     --    },
   },
 })
-
+-- Ty enabler - works! Checking basedpyright for smarter autocompletion...
+vim.lsp.enable 'ty'
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
