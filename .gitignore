@@ -4,3 +4,6 @@ test.sh
 nvim
 
 spell/
+.github/.DS_Store
+lua/.DS_Store
+.DS_Store
