@@ -1015,5 +1015,25 @@ require('lazy').setup({
 })
 -- Ty enabler - works! Checking basedpyright for smarter autocompletion... ty is better.
 vim.lsp.enable 'ty'
+-- tabs and spaces unique to each language
+vim.opt.expandtab = true -- global: use spaces
+
+-- Python → 4 spaces
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'python',
+  callback = function()
+    vim.bo.tabstop = 4
+    vim.bo.shiftwidth = 4
+  end,
+})
+
+-- C++ → 2 spaces
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'c', 'cpp', 'hpp' },
+  callback = function()
+    vim.bo.tabstop = 2
+    vim.bo.shiftwidth = 2
+  end,
+})
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
