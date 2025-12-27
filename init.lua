@@ -1036,6 +1036,13 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+-- Single line comments next line continuation disable
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = '*',
+  callback = function()
+    vim.opt_local.formatoptions:remove { 'r', 'o' }
+  end,
+})
 -- CODELLDB set-up TODO: IF NEEDED
 
 -- The line beneath this is called `modeline`. See `:help modeline`
