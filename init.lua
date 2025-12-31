@@ -1092,7 +1092,7 @@ vim.api.nvim_create_autocmd('FileType', {
       end
 
       -- adjust clang++ flags as you prefer
-      local gpp_cmd = string.format('clang++ -std=c++20 -Wall -Werror -O2 %s -o %s && exec ./%s', fullpath, basename, basename)
+      local gpp_cmd = string.format('clang++ -std=c++20 -fsanitize=address,undefined -Wall -Werror -O2 %s -o %s && exec ./%s', fullpath, basename, basename)
       vim.cmd 'split'
       vim.cmd 'resize 15'
       vim.cmd('terminal bash -lc ' .. vim.fn.shellescape(gpp_cmd))
