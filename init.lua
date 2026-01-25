@@ -190,7 +190,15 @@ vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
+-- My shortcuts
+
+-- next and prev buffers aka homemade harpoon
+-- Buffer navigation in Normal mode using Lua API
+vim.keymap.set('n', '<leader>p', ':bprevious<CR>', { desc = 'Previous buffer', silent = true })
+vim.keymap.set('n', '<leader>n', ':bnext<CR>', { desc = 'Next buffer', silent = true })
 -- TODO:Greatest shortcuts ever
+
+-- Primagen's and borrowed shortcuts
 vim.keymap.set('x', '<leader>p', '"_dP', { desc = 'The Primeagen Paste', noremap = true, silent = true })
 
 -- Move visual selection up and down with K and J
@@ -203,6 +211,8 @@ vim.keymap.set('n', 'n', 'nzzzv')
 vim.keymap.set('n', 'N', 'Nzzzv')
 -- Append the line below to the current line with the cursor in place
 vim.keymap.set('n', 'J', 'mzJ`z')
+
+vim.keymap.set('n', '=ap', "ma=ap'a", { desc = 'Justify Paragraph' })
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -925,14 +935,14 @@ require('lazy').setup({
       --  - va)  - [V]isually select [A]round [)]paren
       --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
       --  - ci'  - [C]hange [I]nside [']quote
-      require('mini.ai').setup { n_lines = 500 }
+      -- require('mini.ai').setup { n_lines = 500 }
 
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
       --
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
-      require('mini.surround').setup()
+      -- require('mini.surround').setup()
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
