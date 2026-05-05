@@ -154,6 +154,12 @@ vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- My shortcuts
 
+-- :W also saves; :Wq also quits
+vim.api.nvim_create_user_command('W', 'write', {})
+vim.api.nvim_create_user_command('Wq', 'wq', {})
+vim.api.nvim_create_user_command('WQ', 'wq', {})
+vim.api.nvim_create_user_command('Q', 'quit', {})
+
 -- next and prev buffers aka homemade harpoon
 -- Buffer navigation in Normal mode using Lua API
 vim.keymap.set('n', '<leader>p', ':bprevious<CR>', { desc = 'Previous buffer', silent = true })
