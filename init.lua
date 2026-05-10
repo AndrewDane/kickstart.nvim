@@ -176,7 +176,22 @@ vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- My shortcuts
+-- better movement in wrapped text
+vim.keymap.set({ 'n', 'v' }, 'j', function()
+  return vim.v.count == 0 and 'gj' or 'j'
+end, { expr = true, silent = true, desc = 'Down (wrap-aware)' })
+vim.keymap.set({ 'n', 'v' }, 'k', function()
+  return vim.v.count == 0 and 'gk' or 'k'
+end, { expr = true, silent = true, desc = 'Up (wrap-aware)' })
 
+-- The courtesy of Teej
+vim.keymap.set('n', '<leader>x', '<cmd>.lua<CR>', { desc = 'Execute the current line' })
+vim.keymap.set('v', '<leader>x', '<cmd>.lua<CR>', { desc = 'Execute the selected lines' })
+vim.keymap.set('n', '<leader>X', ':w<CR><cmd>source %<CR>', { desc = 'Execute the current file' })
+
+vim.keymap.set('n', '<Leader>re', '<cmd>restart<cr>', {
+  desc = '[Re]start Neovim',
+})
 -- :W also saves; :Wq also quits
 vim.api.nvim_create_user_command('W', 'write', {})
 vim.api.nvim_create_user_command('Wq', 'wq', {})
@@ -185,9 +200,12 @@ vim.api.nvim_create_user_command('Q', 'quit', {})
 
 -- next and prev buffers aka homemade harpoon
 -- Buffer navigation in Normal mode using Lua API
-vim.keymap.set('n', '<leader>p', ':bprevious<CR>', { desc = 'Previous buffer', silent = true })
-vim.keymap.set('n', '<leader>n', ':bnext<CR>', { desc = 'Next buffer', silent = true })
--- TODO:Greatest shortcuts ever
+vim.keymap.set('n', '<leader>p', ':bprevious<CR>', { desc = '[P]revious buffer', silent = true })
+vim.keymap.set('n', '<leader>n', ':bnext<CR>', { desc = '[N]ext buffer', silent = true })
+vim.keymap.set('n', '<leader>d', ':bdel<CR>', { desc = '[D]elete Buffer', silent = true })
+
+-- UndoTree Toggle
+vim.keymap.set('n', '<leader>u', ':UndotreeToggle<CR>', { desc = '[U]ndoTree', silent = true })
 
 -- Primagen's and borrowed shortcuts
 vim.keymap.set('x', '<leader>p', '"_dP', { desc = 'The Primeagen Paste', noremap = true, silent = true })
