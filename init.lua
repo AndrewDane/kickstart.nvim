@@ -95,6 +95,9 @@ vim.o.mouse = 'a'
 -- Don't show the mode, since it's already in the status line
 vim.o.showmode = false
 
+-- tabs and spaces unique to each language
+vim.opt.expandtab = true -- global: use spaces
+
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -176,6 +179,11 @@ vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- My shortcuts
+
+-- mini.files
+
+vim.keymap.set('n', '\\', ':lua MiniFiles.open()<CR>', { desc = 'MiniFiles', silent = true })
+
 -- better movement in wrapped text
 vim.keymap.set({ 'n', 'v' }, 'j', function()
   return vim.v.count == 0 and 'gj' or 'j'
@@ -811,6 +819,7 @@ require('lazy').setup({
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
       },
+      -- formatters = { stylua = { args = { '--indent-type', 'Spaces' }, }, },
     },
   },
 
@@ -941,20 +950,7 @@ require('lazy').setup({
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
-      -- Better Around/Inside textobjects
-      --
-      -- Examples:
-      --  - va)  - [V]isually select [A]round [)]paren
-      --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
-      --  - ci'  - [C]hange [I]nside [']quote
-      -- require('mini.ai').setup { n_lines = 500 }
-
-      -- Add/delete/replace surroundings (brackets, quotes, etc.)
-      --
-      -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-      -- - sd'   - [S]urround [D]elete [']quotes
-      -- - sr)'  - [S]urround [R]eplace [)] [']
-      -- require('mini.surround').setup()
+      require('mini.files').setup()
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
@@ -1014,7 +1010,7 @@ require('lazy').setup({
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
   -- require 'kickstart.plugins.autopairs',
-  require 'kickstart.plugins.neo-tree',
+  -- require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
@@ -1051,8 +1047,6 @@ require('lazy').setup({
 })
 -- Ty enabler - works! Checking basedpyright for smarter autocompletion... ty is better.
 vim.lsp.enable 'ty'
--- tabs and spaces unique to each language
-vim.opt.expandtab = true -- global: use spaces
 
 -- Python → 4 spaces
 vim.api.nvim_create_autocmd('FileType', {
